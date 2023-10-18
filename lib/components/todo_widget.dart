@@ -1,3 +1,4 @@
+import 'package:assignment_five_flutter/models/data_model.dart';
 import 'package:assignment_five_flutter/utils/app_theme.dart';
 import 'package:assignment_five_flutter/utils/assets.dart';
 import 'package:assignment_five_flutter/utils/colors.dart';
@@ -5,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TodoWidget extends StatelessWidget {
-  const TodoWidget({super.key});
+  final TodoDM dataModel;
+  const TodoWidget({super.key, required this.dataModel});
 
   @override
   Widget build(BuildContext context) {
@@ -39,24 +41,24 @@ class TodoWidget extends StatelessWidget {
               const SizedBox(
                 width: 12,
               ),
-              const Expanded(
+              Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      "Play Basketball",
+                      dataModel.title,
                       style: AppThemes.textDescriptionTextStyle,
                     ),
                     Text(
-                      "Description",
+                      dataModel.description,
                       style: AppThemes.textDescriptionDateTextStyle,
                     ),
                   ],
                 ),
               ),
               Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   decoration: BoxDecoration(
                       color: AppColor.primary,
                       borderRadius: BorderRadius.circular(15)),

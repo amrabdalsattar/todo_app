@@ -2,26 +2,24 @@ import 'package:assignment_five_flutter/components/floating_action_button.dart';
 import 'package:assignment_five_flutter/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '../components/app_bar.dart';
 import '../tabs/list_tab.dart';
 import '../tabs/settings_tab.dart';
 import '../utils/assets.dart';
+import '../utils/settings_provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   static const String routeName = "homeScreen";
+  static late SettingsProvider provider;
 
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int currentSelectedTabIndex = 0;
-  @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: AppColor.primary,
+      statusBarColor: AppColor.transparent,
     ));
     return Scaffold(
       appBar: const PreferredSize(
@@ -29,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: AppBarGuide(),
       ),
       bottomNavigationBar: buildBottomNavBar(),
-      body: currentSelectedTabIndex == 0 ? const ListTab() : const SettingsTab(),
+      body: provider.currentSelectedTabIndex == 0 ? ListTab() : const SettingsTab(),
       floatingActionButton: const FloatingActionBtn(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
@@ -40,12 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
     shape: const CircularNotchedRectangle(),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     child: BottomNavigationBar(
-      currentIndex: currentSelectedTabIndex,
+      currentIndex: provider.currentSelectedTabIndex,
       onTap: (index){
-        currentSelectedTabIndex = index;
-        setState(() {
+        provider.currentSelectedTabIndexChanger(index);
 
-        });
       },
       items: const [
         BottomNavigationBarItem(
