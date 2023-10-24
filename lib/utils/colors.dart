@@ -16,6 +16,7 @@ class AppColor{
   static const Color transparent = Colors.transparent;
   static const Color white = Colors.white;
   static const Color black = Colors.black;
+  static const Color liteBlack = Color.fromARGB(126, 0, 0, 0);
   static const Color grey = Color.fromARGB(255, 198, 199, 202);
   static const Color lightGreen = Color.fromARGB(255, 96, 229, 87);
 
